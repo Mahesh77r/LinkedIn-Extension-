@@ -37,7 +37,6 @@ export default defineContentScript({
       
       if (target.matches(".msg-form__contenteditable") || target.closest(".msg-form__contenteditable")) {
         const parentElement = target.closest(".msg-form__container") || target.closest(".msg-form__contenteditable");
-        console.log(parentElement);
         if (parentElement) {
            renderModal(parentElement);
 
@@ -88,26 +87,8 @@ export default defineContentScript({
         modalElement.classList.remove("hidden");
 
       }
+      
     }
-
-    const closeModal = () => {
-      const modalElement = document.getElementById("custom-modal");
-      if (modalElement) {
-        modalElement.classList.add("hidden"); 
-        // modalElement.style.setProperty('display', 'none', 'important'); 
-      }
-    }
-
-    document.addEventListener("click", (event: MouseEvent) => {
-      const modal = document.getElementById("custom-modal");
-      const target = event.target as HTMLElement;
-
-      if (modal && !modal.contains(target)) {
-        closeModal();
-      }
-    });
-
-
 
   },
 });

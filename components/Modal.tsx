@@ -83,6 +83,14 @@ export const PopUpModal: React.FC<ModalProps> = ({ insertIcon, generateIcon, reg
       }
 
     };
+
+    const closeModal = (event: any) =>{
+      const content = document.getElementById('model-content');
+    if (content && !content.contains(event.target)) {
+      console.log("Clicked Outside")
+    }
+    }
+    closeModal(MouseEvent);
   
     return (
       <div style={modalStyle} id="custom-modal">
