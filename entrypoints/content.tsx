@@ -1,4 +1,4 @@
-// Importing necessary assets (icons) for the extension UI
+
 import editIcon from "~/assets/edit.svg";
 import insertIcon from "~/assets/insert.svg";
 import generateIcon from "~/assets/generate.svg";
@@ -7,19 +7,17 @@ import ReactDOM from 'react-dom/client';
 import { PopUpModal } from '../components/Modal'
 
 export default defineContentScript({
-  // website links in which extension is going to work
   matches: ["*://*.linkedin.com/*"],
 
   main() {
-    // Render the modal into the document
 
     const renderModal = (parentElement:Element) => {
-      // Create a div element to contain the modal
+      
       const modalContainer = document.createElement("div");
       modalContainer.className = "pop-up-modal";
       document.body.appendChild(modalContainer);
 
-      // Render the PopUpModal component into the modalContainer
+      
       const root = ReactDOM.createRoot(modalContainer);
       root.render(<PopUpModal insertIcon={insertIcon} generateIcon={generateIcon} regenerateIcon={regenerateIcon} parentElement={parentElement}/>);
 
@@ -36,7 +34,7 @@ export default defineContentScript({
     const handleInputInteraction = (event: MouseEvent | FocusEvent) => {
       const target = event.target as HTMLElement;
 
-      // Check if the clicked element is inside the content editable
+      
       if (target.matches(".msg-form__contenteditable") || target.closest(".msg-form__contenteditable")) {
         const parentElement = target.closest(".msg-form__container") || target.closest(".msg-form__contenteditable");
         console.log(parentElement);
@@ -45,7 +43,7 @@ export default defineContentScript({
 
           parentElement.setAttribute("data-artdeco-is-focused", "true");
 
-          // Only add the icon if it doesn't already exist
+          
           if (!parentElement.querySelector(".edit-icon")) {
             const icon = document.createElement("img");
             icon.className = "edit-icon";
@@ -66,9 +64,8 @@ export default defineContentScript({
 
     const handleOutsideClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      // Check if the click is outside the content editable
+      
       if (!target.matches(".msg-form__contenteditable") && !target.closest(".msg-form__contenteditable")) {
-        // Remove the edit icon if it exists
         const editIcons = document.querySelectorAll(".edit-icon");
         editIcons.forEach(icon => icon.remove());
       }
@@ -77,7 +74,7 @@ export default defineContentScript({
     const handleOnClickEditIcon = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (target.matches(".edit-icon")) {
-        openModal(event); // Call the function to open the modal
+        openModal(event); 
       }
     }
 
@@ -96,7 +93,7 @@ export default defineContentScript({
     const closeModal = () => {
       const modalElement = document.getElementById("custom-modal");
       if (modalElement) {
-        modalElement.classList.add("hidden"); // Add hidden class to hide the modal
+        modalElement.classList.add("hidden"); 
         // modalElement.style.setProperty('display', 'none', 'important'); 
       }
     }
@@ -106,7 +103,7 @@ export default defineContentScript({
       const target = event.target as HTMLElement;
 
       if (modal && !modal.contains(target)) {
-        closeModal(); // Close the modal if clicked outside
+        closeModal();
       }
     });
 

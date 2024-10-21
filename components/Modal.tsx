@@ -23,7 +23,7 @@ interface ModalProps {
     borderRadius: '8px',
     width: '100%',
     maxWidth: '570px',
-    padding: '20px',
+    padding: '8px 24px 24px',
   };
   
 
@@ -58,11 +58,10 @@ export const PopUpModal: React.FC<ModalProps> = ({ insertIcon, generateIcon, reg
     };
   
     const insertHandler = (event:any) =>{
-      console.log("Insert Clicked")
       
-      console.log("InsideInsert",parentElement)
-      console.log(parentElement ? "parent find" : "NOt found")
-      parentElement?.removeAttribute('data-placeholder');
+        const placeHolderClass = document.querySelector<HTMLElement>('.msg-form__placeholder');
+        placeHolderClass?.removeAttribute('data-placeholder');
+        
       
       let existingParagraph = parentElement?.querySelector("p");
       
@@ -71,19 +70,17 @@ export const PopUpModal: React.FC<ModalProps> = ({ insertIcon, generateIcon, reg
         existingParagraph = document.createElement("p");
         parentElement?.appendChild(existingParagraph);
       }
-      console.log("Last 2nd step ")
-      // Clear and insert the new message
+     
       existingParagraph.textContent = generateMessage();
 
 
-      console.log("Last Step ")
       const modalElement = document.getElementById("custom-modal");
-      if(modalElement){ modalElement?.style.setProperty('display', 'none', 'important');
+      if(modalElement){ 
+        modalElement?.style.setProperty('display', 'none', 'important');
       }
       else{
         console.log("Element not Found")
       }
-      console.log("Closed ")
 
     };
   
@@ -91,7 +88,7 @@ export const PopUpModal: React.FC<ModalProps> = ({ insertIcon, generateIcon, reg
       <div style={modalStyle} id="custom-modal">
         <div style={contentStyle} id="model-content">
           {/* messages */}
-          <div id="messages" style={{ marginTop: '10px', maxHeight: '200px', overflowY: 'auto', padding: '10px', display: 'flex', flexDirection: 'column' }}>
+          <div id="messages" style={{  maxHeight: '200px', overflowY: 'auto', padding: '12px', display: 'flex', flexDirection: 'column' }}>
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -111,19 +108,19 @@ export const PopUpModal: React.FC<ModalProps> = ({ insertIcon, generateIcon, reg
           </div>
   
           {/* input box */}
-          <div style={{ marginBottom: '10px' }}>
+          <div style={{ marginBottom: '12px' }}>
             <input
               id="input-text"
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Enter your prompt..."
-              style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+              style={{ width: '100%', padding: '18px', marginBottom:'8px', border: '1px solid #ccc', borderRadius: '4px' }}
             />
           </div>
   
           {/* buttons */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
             {isGenerate && (
               <Button
                 title="Insert"
