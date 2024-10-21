@@ -1,6 +1,12 @@
 
 https://github.com/user-attachments/assets/6ec6c1a7-eec1-416e-a3dd-2dd0327057dc
 
+#**How To Start**
+cmd - npm i
+cmd - npm run build
+Then open chorme 
+Go to Manage Extension anc click on Load unpacked
+go to project dir and choose these folder *\LinkedIn-Extension-\.output\chrome-mv3
 # ‘LinkedIn AI Reply’ Chrome Extension
 
 This Chrome extension is built using the **WXT framework** and helps automate message responses on LinkedIn. It allows users to quickly generate predefined responses in the LinkedIn messaging interface, saving time and effort when managing repetitive communication tasks.
