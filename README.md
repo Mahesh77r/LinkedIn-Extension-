@@ -2,7 +2,7 @@
 https://github.com/user-attachments/assets/6ec6c1a7-eec1-416e-a3dd-2dd0327057dc
 
 #**How To Start**
-cmd - npm i
+cmd - npm i \n
 cmd - npm run build
 Then open chorme 
 Go to Manage Extension anc click on Load unpacked
