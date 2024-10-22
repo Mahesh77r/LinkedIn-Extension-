@@ -13,7 +13,7 @@ export const PopUpModal: React.FC<ModalProps> = ({ insertIcon, generateIcon, reg
   const [text, setText] = useState('');
   const [isGenerate, setGenerate] = useState(false);
   const [messages, setMessages] = useState<{ text: string; type: 'user' | 'generated' }[]>([]);
-
+  const [isOpen, setIsOpen] = useState(false);
   const generateMessage = () => {
     const messages = [
       "Thank you for the opportunity! If you have any more questions or if there's anything else I can help you with, feel free to ask.",
@@ -60,24 +60,36 @@ export const PopUpModal: React.FC<ModalProps> = ({ insertIcon, generateIcon, reg
   };
 
   const closeModal = (event: any) => {
-    const content = document.getElementById('model-content');
-    if (content && !content.contains(event.target)) {
-      console.log('Clicked Outside');
+    const target = event.target as HTMLElement;
+
+    if (target?.id === 'custom-modal') {
+      console.log("Inside Close Modal")
+      const modalElement = document.getElementById("custom-modal");
+      modalElement?.style.setProperty('display', 'none', 'important');
+      console.log("Closed")
+
+      setIsOpen(false); // Close the modal
     }
   };
   closeModal(MouseEvent);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 justify-center items-center z-[4000] hidden" id="custom-modal">
-      <div className="bg-white rounded-lg w-full max-w-[570px] p-[24px]" id="model-content">
+    <div
+      className={`fixed inset-0 bg-black bg-opacity-50 justify-center items-center z-[4000] ${isOpen ? 'flex' : 'hidden'}`}
+      id="custom-modal"
+      onClick={closeModal} // Attach the click handler
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="bg-white rounded-lg w-full max-w-[570px] p-[24px]" id="model-content" aria-hidden="true">
         {/* messages */}
         <div className="max-h-[200px] overflow-y-auto p-3 flex flex-col" id="messages">
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`${
-                message.type === 'user' ? 'self-end bg-[#DFE1E7]' : 'self-start bg-[#DBEAFE]'
-              } text-[#666D80] rounded-lg p-2 mb-1 max-w-[80%]`}
+              className={`${message.type === 'user' ? 'self-end bg-[#DFE1E7]' : 'self-start bg-[#DBEAFE]'
+                } text-[#666D80] rounded-lg p-2 mb-1 max-w-[80%]`}
             >
               {message.text}
             </div>

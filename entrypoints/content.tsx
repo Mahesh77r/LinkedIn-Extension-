@@ -38,7 +38,9 @@ export default defineContentScript({
       if (target.matches(".msg-form__contenteditable") || target.closest(".msg-form__contenteditable")) {
         const parentElement = target.closest(".msg-form__container") || target.closest(".msg-form__contenteditable");
         if (parentElement) {
-           renderModal(parentElement);
+          if(document.getElementsByClassName('pop-up-modal').length === 0){
+            renderModal(parentElement);
+          }
 
           parentElement.setAttribute("data-artdeco-is-focused", "true");
 
