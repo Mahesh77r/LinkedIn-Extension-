@@ -4,7 +4,7 @@ import insertIcon from "~/assets/insert.svg";
 import generateIcon from "~/assets/generate.svg";
 import regenerateIcon from "~/assets/regenerate.svg";
 import ReactDOM from 'react-dom/client';
-import { PopUpModal } from '../components/Modal'
+import { PopUpModal } from './popup/components/Modal'
 
 export default defineContentScript({
   matches: ["*://*.linkedin.com/*"],
@@ -92,9 +92,3 @@ export default defineContentScript({
 
   },
 });
-
-
-
-
-
-
